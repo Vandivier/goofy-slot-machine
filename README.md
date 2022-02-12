@@ -1,6 +1,8 @@
 ## Slot Machine Game
 
-This is a fullstack slot machine game, with a twist: the house always wins!
+This is a fullstack slot machine game, but like weird.
+
+Currently, for example, exactly 10% of the time
 
 Built with:
 
@@ -13,3 +15,12 @@ Built with:
 ## Running the App
 
 `cd be && npm run build-and-start`
+
+## TODO
+
+1. convert server to TS
+2. deploy app somewhere
+3. indeterminate icons ? should be in-order not random
+4. add more testing
+5. rename counterslice
+6. remove styled components
