@@ -6,11 +6,11 @@ Currently, for example, exactly 10% of the time
 
 Built with:
 
-1. `npx epxress-generator --git --no-view be`
+1. `npx express-generator --git --no-view be`
 2. `npx create-react-app ui --template redux-typescript`
-3. [Material UI](https://mui.com/getting-started/installation/) with `styled-components` for the styling engine.
+3. [Material UI](https://mui.com/getting-started/installation/)
 
-   - That is, `npm install @mui/material @mui/styled-engine-sc styled-components @emotion/styled @emotion/react`
+   - That is, `npm install @mui/material @emotion/react`
 
 ## Running the App
 
@@ -23,6 +23,5 @@ Built with:
 3. indeterminate icons ? should be in-order not random
 4. add more testing
 5. rename counterslice
-6. remove styled components
-7. session credits should update after last slot icon
-8. add dark mode
+6. session credits should update after last slot icon
+7. add dark mode

@@ -12,7 +12,6 @@ const App = () => {
           backgroundImage: "url(slot-machine.png)",
         }}
       >
-        {/* TODO: styled-compoents approach */}
         <h1
           style={{
             color: "white",
@@ -23,7 +22,6 @@ const App = () => {
         >
           Pull the lever!
         </h1>
-        {/* TODO: styled-compoents approach */}
       </header>
 
       <SlotMachine />
