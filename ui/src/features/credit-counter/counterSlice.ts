@@ -59,10 +59,13 @@ export const patchRollRequest = createAsyncThunk(
       const parsedResponse = await rawResponse.json();
       const slotValues = parsedResponse?.slotValues;
 
+      // make it look like u immediately spend one credit
+      thunkApi.dispatch(decrementCredits());
+
       if (Array.isArray(slotValues) && slotValues.length === 3) {
-        resolveSlot(0, slotValues, thunkApi);
-        resolveSlot(1, slotValues, thunkApi);
-        resolveSlot(2, slotValues, thunkApi);
+        await resolveSlot(0, slotValues, thunkApi);
+        await resolveSlot(1, slotValues, thunkApi);
+        await resolveSlot(2, slotValues, thunkApi);
       } else {
         if (parsedResponse.error) {
           return parsedResponse;
@@ -100,36 +103,42 @@ export const putBankBalance = createAsyncThunk(
 
 export const updateSingleSlotValue = createAsyncThunk(
   "counter/updateSingleSlotValue",
-  async (args: any) => {
-    // TODO: emit clinking sound
-    return args;
-  }
+  async (args: any) => args
 );
 
 const resolveSlot = (
   slotIndex: number,
   slotValues: SlotValue[],
   thunkApi: any
-) => {
-  const audioSlotClink = new Audio(
-    "https://github.com/Vandivier/goofy-slot-machine/raw/main/ui/public/slot-clink.mp3"
-  );
-
-  setTimeout(() => {
-    audioSlotClink.play();
-    thunkApi.dispatch(
-      updateSingleSlotValue({
-        slotValueIndex: slotIndex,
-        updatedSlotValue: slotValues[slotIndex],
-      })
+) =>
+  new Promise((res) => {
+    const audioSlotClink = new Audio(
+      "https://github.com/Vandivier/goofy-slot-machine/raw/main/ui/public/slot-clink.mp3"
     );
-  }, 2000 + 1000 * slotIndex);
-};
+
+    setTimeout(
+      () => {
+        audioSlotClink.play();
+        res(null);
+        thunkApi.dispatch(
+          updateSingleSlotValue({
+            slotValueIndex: slotIndex,
+            updatedSlotValue: slotValues[slotIndex],
+          })
+        );
+      },
+      slotIndex === 0 ? 2000 : 1000
+    );
+  });
 
 export const counterSlice = createSlice({
   name: "counter",
   initialState,
-  reducers: {},
+  reducers: {
+    decrementCredits: (state) => {
+      state.playerCount = state.playerCount - 1;
+    },
+  },
   extraReducers: (builder) => {
     // ref: https://soyoung210.github.io/redux-toolkit/api/createAsyncThunk
     builder
@@ -175,7 +184,7 @@ export const counterSlice = createSlice({
   },
 });
 
-// export const {} = counterSlice.actions;
+export const { decrementCredits } = counterSlice.actions;
 
 export const selectBankCount = (state: RootState) => state.counter.bankCount;
 export const selectPlayerCount = (state: RootState) =>
