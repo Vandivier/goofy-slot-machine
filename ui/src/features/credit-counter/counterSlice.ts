@@ -59,42 +59,10 @@ export const patchRollRequest = createAsyncThunk(
       const parsedResponse = await rawResponse.json();
       const slotValues = parsedResponse?.slotValues;
 
-      if (
-        slotValues &&
-        slotValues !== ERROR_INDICATOR &&
-        Array.isArray(slotValues) &&
-        slotValues.length === 3
-      ) {
-        setTimeout(
-          () =>
-            thunkApi.dispatch(
-              updateSingleSlotValue({
-                slotValueIndex: 0,
-                updatedSlotValue: slotValues[0],
-              })
-            ),
-          1000
-        );
-        setTimeout(
-          () =>
-            thunkApi.dispatch(
-              updateSingleSlotValue({
-                slotValueIndex: 1,
-                updatedSlotValue: slotValues[1],
-              })
-            ),
-          2000
-        );
-        setTimeout(
-          () =>
-            thunkApi.dispatch(
-              updateSingleSlotValue({
-                slotValueIndex: 2,
-                updatedSlotValue: slotValues[2],
-              })
-            ),
-          3000
-        );
+      if (Array.isArray(slotValues) && slotValues.length === 3) {
+        resolveSlot(0, slotValues, thunkApi);
+        resolveSlot(1, slotValues, thunkApi);
+        resolveSlot(2, slotValues, thunkApi);
       } else {
         if (parsedResponse.error) {
           return parsedResponse;
@@ -132,8 +100,31 @@ export const putBankBalance = createAsyncThunk(
 
 export const updateSingleSlotValue = createAsyncThunk(
   "counter/updateSingleSlotValue",
-  async (args: any) => args
+  async (args: any) => {
+    // TODO: emit clinking sound
+    return args;
+  }
 );
+
+const resolveSlot = (
+  slotIndex: number,
+  slotValues: SlotValue[],
+  thunkApi: any
+) => {
+  const audioSlotClink = new Audio(
+    "https://github.com/Vandivier/goofy-slot-machine/raw/main/ui/public/slot-clink.mp3"
+  );
+
+  setTimeout(() => {
+    audioSlotClink.play();
+    thunkApi.dispatch(
+      updateSingleSlotValue({
+        slotValueIndex: slotIndex,
+        updatedSlotValue: slotValues[slotIndex],
+      })
+    );
+  }, 2000 + 1000 * slotIndex);
+};
 
 export const counterSlice = createSlice({
   name: "counter",
@@ -184,7 +175,7 @@ export const counterSlice = createSlice({
   },
 });
 
-export const {} = counterSlice.actions;
+// export const {} = counterSlice.actions;
 
 export const selectBankCount = (state: RootState) => state.counter.bankCount;
 export const selectPlayerCount = (state: RootState) =>
