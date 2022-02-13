@@ -24,3 +24,4 @@ Built with:
 4. add more testing
 5. rename counterslice
 6. remove styled components
+7. add sounds for when the icon is picked
