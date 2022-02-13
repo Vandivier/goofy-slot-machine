@@ -1,7 +1,9 @@
-const bankService = require("../services/bank");
-const express = require("express");
+import express from "express";
+import { v4 as uuidv4 } from "uuid";
+
+import bankService from "../services/bank";
+
 const router = express.Router();
-const { v4: uuidv4 } = require("uuid");
 
 router.get("/", function (req, res) {
   const sessionId = uuidv4();
@@ -12,4 +14,4 @@ router.get("/", function (req, res) {
   });
 });
 
-module.exports = router;
+export default router;

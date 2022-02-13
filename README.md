@@ -14,14 +14,21 @@ Built with:
 
 ## Running the App
 
+I suggest you build the app statically for prod deployment, like:
+
 `cd be && npm run build-and-start`
+
+For development, you might like to run the front and back ends seperately, like:
+
+`cd be && yarn serve`
+
+`cd ui && yarn start`
 
 ## TODO
 
-1. convert server to TS
-2. deploy app somewhere
-3. add more testing
-4. add dark mode
-5. bing bong easter egg if u click exclamation point
+1. add more testing
+2. bing bong easter egg if u click exclamation point
    - add state for isRolling which disables lever until roll complete
    - isRolling disable fails when in bing bong mode (you can rapid click)
+3. deploy app somewhere
+4. add dark mode

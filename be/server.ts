@@ -4,9 +4,11 @@
  * Module dependencies.
  */
 
-const app = require("../app");
-const debug = require("debug")("be:server");
-const http = require("http");
+import app from "./app";
+import debug from "debug";
+import http from "http";
+
+const debugBinder = debug("be:server");
 const port = normalizePort(process.env.PORT || "8080");
 
 app.set("port", port);
@@ -61,5 +63,7 @@ function onError(error) {
 function onListening() {
   const addr = server.address();
   const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
-  debug("Listening on " + bind);
+  debugBinder("Listening on " + bind);
 }
+
+console.log(`Express is now running at http://localhost:${port}`);

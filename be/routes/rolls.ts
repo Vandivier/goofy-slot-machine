@@ -1,6 +1,8 @@
-const express = require("express");
+import express from "express";
+
+import rollService from "../services/rolls";
+
 const router = express.Router();
-const rollService = require("../services/rolls");
 
 // tokens are kind of like a financial information,
 //   so post over get for secure obfuscation
@@ -19,4 +21,4 @@ router.patch("/", function (req, res) {
   }
 });
 
-module.exports = router;
+export default router;

@@ -1,5 +1,3 @@
-const service = {};
-
 const rewardMap = {
   c: 5,
   l: 10,
@@ -55,14 +53,16 @@ const getSlotValues = () => [
   getSingleSlotResult(),
 ];
 
-service.createRoll = (playerCount, cheatChance) => {
-  const slotValues = getCheatRoll(cheatChance);
-  const reward = getRewardAmount(slotValues);
+const service = {
+  createRoll: (playerCount, cheatChance) => {
+    const slotValues = getCheatRoll(cheatChance);
+    const reward = getRewardAmount(slotValues);
 
-  return {
-    playerCount: playerCount + reward - 1,
-    slotValues,
-  };
+    return {
+      playerCount: playerCount + reward - 1,
+      slotValues,
+    };
+  },
 };
 
-module.exports = service;
+export default service;

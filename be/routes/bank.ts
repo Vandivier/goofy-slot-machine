@@ -1,6 +1,8 @@
-const express = require("express");
+import express from "express";
+
+import bankService from "../services/bank";
+
 const router = express.Router();
-const bankService = require("../services/bank");
 
 router.put("/", function (req, res) {
   const { playerCount } = req.body;
@@ -18,4 +20,4 @@ router.put("/", function (req, res) {
   });
 });
 
-module.exports = router;
+export default router;
