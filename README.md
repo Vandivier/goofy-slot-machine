@@ -20,8 +20,9 @@ Built with:
 
 1. convert server to TS
 2. deploy app somewhere
-3. indeterminate icons ? should be in-order not random
-4. add more testing
-5. rename counterslice
-6. session credits should update after last slot icon
-7. add dark mode
+3. add more testing
+4. rename counterslice
+5. add dark mode
+6. bing bong easter egg if u click exclamation point
+   - add state for isRolling which disables lever until roll complete
+   - isRolling disable fails when in bing bong mode (you can rapid click)

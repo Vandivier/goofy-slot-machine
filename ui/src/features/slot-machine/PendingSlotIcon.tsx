@@ -7,28 +7,15 @@ export const PendingSlotIcon = () => {
     ([key]) => key !== "?"
   );
 
-  const [currIcon, setCurrIcon] = React.useState(slotIconsExceptPending[0]);
+  const [currIcon, setCurrIcon] = React.useState(0);
 
   React.useEffect(() => {
-    const getRandomSlotImage = () => {
-      const iconCount = slotIconsExceptPending.length;
-      const stepThreshold = 1 / iconCount;
-      const randomResult = Math.random();
-      const randomIcon = Math.floor(randomResult / stepThreshold);
-      return slotIconsExceptPending[randomIcon];
-    };
-
     const timer = setTimeout(() => {
-      let nextIcon = getRandomSlotImage();
-
-      while (currIcon[0] === nextIcon[0]) {
-        nextIcon = getRandomSlotImage();
-      }
-
-      setCurrIcon(nextIcon);
-    }, 200);
+      const nextIndex = (currIcon + 1) % slotIconsExceptPending.length;
+      setCurrIcon(nextIndex);
+    }, 100);
     return () => clearTimeout(timer);
   }, [currIcon, slotIconsExceptPending]);
 
-  return <>{currIcon[1]}</>;
+  return <>{slotIconsExceptPending[currIcon][1]}</>;
 };
