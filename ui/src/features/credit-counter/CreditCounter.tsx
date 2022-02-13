@@ -7,6 +7,7 @@ import {
   patchRollRequest,
   putBankBalance,
   selectBankCount,
+  selectLeverPullAudio,
   selectPlayerCount,
   selectPlayerCountErrorMessage,
   selectSessionId,
@@ -15,6 +16,7 @@ import styles from "./CreditCounter.module.css";
 
 export const CreditCounter = () => {
   const bankCount = useAppSelector(selectBankCount);
+  const leverPullAudio = useAppSelector(selectLeverPullAudio);
   const playerCount = useAppSelector(selectPlayerCount);
   const playerCountErrorMessage = useAppSelector(selectPlayerCountErrorMessage);
   const sessionId = useAppSelector(selectSessionId);
@@ -25,9 +27,7 @@ export const CreditCounter = () => {
   };
 
   const handleClickSlotMachineLever = () => {
-    new Audio(
-      "https://github.com/Vandivier/goofy-slot-machine/raw/main/ui/public/slot-machine-crank.mp3"
-    ).play();
+    new Audio(leverPullAudio).play();
     dispatch(patchRollRequest({ playerCount }));
   };
 

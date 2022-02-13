@@ -28,7 +28,6 @@ For development, you might like to run the front and back ends seperately, like:
 
 1. add more testing
 2. bing bong easter egg if u click exclamation point
-   - add state for isRolling which disables lever until roll complete
    - isRolling disable fails when in bing bong mode (you can rapid click)
 3. deploy app somewhere
 4. add dark mode

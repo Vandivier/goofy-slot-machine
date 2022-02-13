@@ -2,6 +2,8 @@ import counterReducer, { CreditCounterState } from "./creditCounterSlice";
 
 describe("counter reducer", () => {
   const initialState: CreditCounterState = {
+    bingBongMode: false,
+    leverPullAudioUrl: "",
     sessionId: "",
     status: "idle",
     bankCount: 0,

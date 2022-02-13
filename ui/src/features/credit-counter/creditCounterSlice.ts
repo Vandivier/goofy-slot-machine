@@ -1,12 +1,20 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 
+const BING_BONG_AUDIO_URLS = [
+  "https://github.com/Vandivier/goofy-slot-machine/raw/main/ui/public/bb-1.mp3",
+  "https://github.com/Vandivier/goofy-slot-machine/raw/main/ui/public/bb-2.mp3",
+  "https://github.com/Vandivier/goofy-slot-machine/raw/main/ui/public/bb-fyl.mp3",
+];
+
 export const ERROR_INDICATOR = "with-error";
 
 export interface CreditCounterState {
+  bingBongMode: boolean;
   sessionId: string;
   status: "idle" | "loading" | "failed";
   bankCount: number;
+  leverPullAudioUrl: string;
   playerCount: number;
   playerCountErrorMessage: string;
   slotValues: SlotValue[];
@@ -20,6 +28,9 @@ type AccountChangeArgs = {
 export type SlotValue = "?" | "c" | "l" | "o" | "w";
 
 const initialState: CreditCounterState = {
+  bingBongMode: false,
+  leverPullAudioUrl:
+    "https://github.com/Vandivier/goofy-slot-machine/raw/main/ui/public/slot-machine-crank.mp3",
   sessionId: "",
   status: "idle",
   bankCount: 0,
@@ -61,6 +72,7 @@ export const patchRollRequest = createAsyncThunk(
 
       // make it look like u immediately spend one credit
       thunkApi.dispatch(decrementCredits());
+      thunkApi.dispatch(refreshBingBongMode());
 
       if (Array.isArray(slotValues) && slotValues.length === 3) {
         await resolveSlot(0, slotValues, thunkApi);
@@ -138,6 +150,12 @@ export const creditCounterSlice = createSlice({
     decrementCredits: (state) => {
       state.playerCount = state.playerCount - 1;
     },
+    refreshBingBongMode: (state) => {
+      const steps = BING_BONG_AUDIO_URLS.length;
+      const randomIndex = Math.floor(Math.random() * steps);
+      state.leverPullAudioUrl = BING_BONG_AUDIO_URLS[randomIndex];
+      state.bingBongMode = true;
+    },
   },
   extraReducers: (builder) => {
     // ref: https://soyoung210.github.io/redux-toolkit/api/createAsyncThunk
@@ -184,9 +202,12 @@ export const creditCounterSlice = createSlice({
   },
 });
 
-export const { decrementCredits } = creditCounterSlice.actions;
+export const { decrementCredits, refreshBingBongMode } =
+  creditCounterSlice.actions;
 
 export const selectBankCount = (state: RootState) => state.counter.bankCount;
+export const selectLeverPullAudio = (state: RootState) =>
+  state.counter.leverPullAudioUrl;
 export const selectPlayerCount = (state: RootState) =>
   state.counter.playerCount;
 export const selectPlayerCountErrorMessage = (state: RootState) =>
