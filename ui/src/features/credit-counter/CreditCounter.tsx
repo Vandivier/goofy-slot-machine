@@ -25,6 +25,9 @@ export const CreditCounter = () => {
   };
 
   const handleClickSlotMachineLever = () => {
+    new Audio(
+      "https://github.com/Vandivier/goofy-slot-machine/raw/main/ui/public/slot-machine-crank.mp3"
+    ).play();
     dispatch(patchRollRequest({ playerCount }));
   };
 
@@ -41,11 +44,12 @@ export const CreditCounter = () => {
   return (
     <section>
       <Button
+        disabled={!!playerCountErrorMessage || playerCount === 0}
         onClick={handleClickSlotMachineLever}
         size="large"
         variant="contained"
       >
-        Pull! (Start Game)
+        Pull the Lever! (Start Game)
       </Button>
       <Button
         onClick={handleClickCashOut}
