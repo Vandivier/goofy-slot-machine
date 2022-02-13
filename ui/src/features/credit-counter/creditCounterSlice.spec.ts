@@ -1,7 +1,7 @@
-import counterReducer, { CounterState } from "./counterSlice";
+import counterReducer, { CreditCounterState } from "./creditCounterSlice";
 
 describe("counter reducer", () => {
-  const initialState: CounterState = {
+  const initialState: CreditCounterState = {
     sessionId: "",
     status: "idle",
     bankCount: 0,

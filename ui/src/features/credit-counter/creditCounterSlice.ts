@@ -3,7 +3,7 @@ import { RootState } from "../../app/store";
 
 export const ERROR_INDICATOR = "with-error";
 
-export interface CounterState {
+export interface CreditCounterState {
   sessionId: string;
   status: "idle" | "loading" | "failed";
   bankCount: number;
@@ -19,7 +19,7 @@ type AccountChangeArgs = {
 // cherry, lemon, orange, watermelon
 export type SlotValue = "?" | "c" | "l" | "o" | "w";
 
-const initialState: CounterState = {
+const initialState: CreditCounterState = {
   sessionId: "",
   status: "idle",
   bankCount: 0,
@@ -131,7 +131,7 @@ const resolveSlot = (
     );
   });
 
-export const counterSlice = createSlice({
+export const creditCounterSlice = createSlice({
   name: "counter",
   initialState,
   reducers: {
@@ -184,7 +184,7 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { decrementCredits } = counterSlice.actions;
+export const { decrementCredits } = creditCounterSlice.actions;
 
 export const selectBankCount = (state: RootState) => state.counter.bankCount;
 export const selectPlayerCount = (state: RootState) =>
@@ -194,4 +194,4 @@ export const selectPlayerCountErrorMessage = (state: RootState) =>
 export const selectRolls = (state: RootState) => state.counter.slotValues;
 export const selectSessionId = (state: RootState) => state.counter.sessionId;
 
-export default counterSlice.reducer;
+export default creditCounterSlice.reducer;

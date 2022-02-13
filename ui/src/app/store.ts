@@ -1,9 +1,9 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import counterReducer from "../features/credit-counter/counterSlice";
+import creditCounterReducer from "../features/credit-counter/creditCounterSlice";
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    counter: creditCounterReducer,
   },
 });
 

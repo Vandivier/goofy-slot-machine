@@ -1,8 +1,8 @@
 import { Grid } from "@mui/material";
 
 import { useAppSelector } from "../../app/hooks";
-import { selectRolls } from "../../features/credit-counter/counterSlice";
-import { SlotValue } from "../credit-counter/counterSlice";
+import { selectRolls } from "../../features/credit-counter/creditCounterSlice";
+import { SlotValue } from "../credit-counter/creditCounterSlice";
 import { Cherry } from "./Cherry";
 import { Lemon } from "./Lemon";
 import { Orange } from "./Orange";

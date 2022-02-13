@@ -10,7 +10,7 @@ import {
   selectPlayerCount,
   selectPlayerCountErrorMessage,
   selectSessionId,
-} from "./counterSlice";
+} from "./creditCounterSlice";
 import styles from "./CreditCounter.module.css";
 
 export const CreditCounter = () => {
